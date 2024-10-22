@@ -2,21 +2,21 @@ from flask import Flask, render_template, request
 from flask_socketio import SocketIO, emit
 import random
 
-
+# Flask and SocketIO Initialization
 app = Flask(__name__)
 socketio = SocketIO(app)
 
-# python dict. store connected users. key is socket id, value is username and avatarUrl
+# python dictionary to store connected users. key is socket id, value is username and avatarUrl
 users = {}
 
 
-# route for index page
+# Route for home page
 @app.route('/')
 def index():
     return render_template('index.html')
 
 
-# we're listening for the connect event
+# Handling User Connection (Socket Event `connect`)
 @socketio.on("connect")
 def handle_connect():
     username = f"user_{random.randint(1000,9999)}"
@@ -35,7 +35,7 @@ def handle_connect():
     emit("set_username", {"username":username})   
     
 
-# we're listening for the disconnect event
+# Handling User Disconnection (Socket Event `disconnect`)
 @socketio.on("disconnect")
 def handle_disconnect():
     user = users.pop(request.sid, None)
@@ -44,7 +44,7 @@ def handle_disconnect():
         emit("user_left",{"username":user["username"]}, broadcast=True)
  
      
-# we're listening for the (send message) message event
+# Handling Send Message Event (Socket Event `send_message`)
 @socketio.on("send_message")
 def handle_message(data):
     user = users.get(request.sid)
@@ -57,7 +57,7 @@ def handle_message(data):
         },broadcast=True)
 
 
-# we're listening for the update username event
+# Handling Update Username Event (Socket Event `update_username`)
 @socketio.on("update_username")
 def handle_update_username(data):
     old_username = users[request.sid]["username"]
@@ -70,5 +70,6 @@ def handle_update_username(data):
     },broadcast=True)
 
 
+# Running the Flask-SocketIO Application
 if __name__ == "__main__":
     socketio.run(app, debug=True)
