@@ -1,2 +1,1 @@
-# chat_app
-Flask chat application.
+# Python-Flask Chat Application.
