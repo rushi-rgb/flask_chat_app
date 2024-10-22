@@ -30,5 +30,14 @@ def handle_connect():
     # to notify about the joined user
     emit("set_username", {"username":username})
     
+    
+    
+# we're listening for the disconnect event
+@socketio.on("disconnect")
+def handle_disconnect():
+    user = users.pop(request.sid, None)
+    if user:
+        emit("user_left",{"username":user["username"]}, broadcast=True)
+    
 if __name__ == "__main__":
     socketio.run(app, debug=True)
