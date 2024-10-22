@@ -2,7 +2,7 @@
 
 ## Real-Time Chat Application with Flask and SocketIO
 
-This project is a real-time chat application built with Flask and Flask-SocketIO, enabling seamless real-time communication between users. The app automatically assigns random usernames and avatars to connected users, allowing them to join the chat, send messages, and update their usernames. All user activities, such as joining, messaging, and leaving, are broadcasted to all participants in real-time.
+This project is a real-time chat application built with Flask and Flask-SocketIO, enabling seamless real-time communication between users. The app automatically assigns random usernames and avatars to connected users and allowing them to join the chat, send messages and update their usernames. All user activities such as joining, messaging, and leaving are broadcasted to all participants in real-time.
 
 ### Features:
 - **Random Usernames & Avatars**: Each user is assigned a random username and avatar upon connection.
@@ -32,44 +32,39 @@ To run the Flask-SocketIO app locally, follow these steps:
 ### Steps:
 
 1. **Clone the repository** (or download the project files):
-   If the project is hosted on GitHub or another source control platform, clone it. Otherwise, download the files manually.
 
    ```bash
    git clone https://github.com/prashantm1535/chat_app.git
    cd chat_app
    ```
 
-2. **Create a virtual environment** (optional but recommended):
-   This step isolates your project dependencies.
+2. **Create a virtual environment** (optional but recommended): This step isolates your project dependencies.
    
 - On **Windows**:
   ```bash
   python -m venv .venv
   .venv\Scripts\activate
   ```
-
+  
 - On **macOS/Linux**:
   ```bash
   python3 -m venv .venv
   source .venv/bin/activate
   ```
 
-3. **Install dependencies**:
-   Install the required Python packages using the `requirements.txt` file.
+3. **Install dependencies**: Install the required Python packages using the `requirements.txt` file.
 
    ```bash
    pip install -r requirements.txt
    ```
 
-4. **Run the Flask application**:
-   Run the app using the `socketio.run` function provided in the `app.py` file.
+4. **Run the Flask application**: Run the app using the `socketio.run` function provided in the `app.py` file.
    
    ```bash
    python app.py
    ```
 
-5. **Access the app in your browser**:
-   Open your web browser and navigate to:
+5. **Access the app in your browser**: Open your web browser and navigate to:
    ```
    http://localhost:5000
    ```
