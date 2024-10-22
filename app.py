@@ -38,6 +38,17 @@ def handle_disconnect():
     user = users.pop(request.sid, None)
     if user:
         emit("user_left",{"username":user["username"]}, broadcast=True)
-    
+     
+# we're listening for the (send message) message event
+@socketio.on("send_message")
+def handle_message(data):
+    user = users.get(request.sid)
+    if user:
+        emit("new_message",{
+            "username":user["username"],
+            "avatar":user["avatar"],
+            "message":data["message"]
+            },broadcast=True)    
+
 if __name__ == "__main__":
     socketio.run(app, debug=True)
