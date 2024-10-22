@@ -2,22 +2,26 @@ from flask import Flask, render_template, request
 from flask_socketio import SocketIO, emit
 import random
 
+
 app = Flask(__name__)
 socketio = SocketIO(app)
 
-# python dict. store connected users. key is socketid value is username and avatarUrl
+# python dict. store connected users. key is socket id, value is username and avatarUrl
 users = {}
+
 
 # route for index page
 @app.route('/')
 def index():
     return render_template('index.html')
 
+
 # we're listening for the connect event
 @socketio.on("connect")
 def handle_connect():
     username = f"user_{random.randint(1000,9999)}"
     gender = random.choice(["girl", "boy"])
+    
     # https://avatar.iran.liara.run/public/boy?username=user_123
     avatar_url = f"https://avatar.iran.liara.run/public/{gender}?username={username}"
     
@@ -28,27 +32,43 @@ def handle_connect():
     emit("user_joined", {"username":username, "avatar":avatar_url}, broadcast=True)
     
     # to notify about the joined user
-    emit("set_username", {"username":username})
+    emit("set_username", {"username":username})   
     
-    
-    
+
 # we're listening for the disconnect event
 @socketio.on("disconnect")
 def handle_disconnect():
     user = users.pop(request.sid, None)
+    
     if user:
         emit("user_left",{"username":user["username"]}, broadcast=True)
+ 
      
 # we're listening for the (send message) message event
 @socketio.on("send_message")
 def handle_message(data):
     user = users.get(request.sid)
+    
     if user:
         emit("new_message",{
             "username":user["username"],
             "avatar":user["avatar"],
             "message":data["message"]
-            },broadcast=True)    
+        },broadcast=True)
+
+
+# we're listening for the update username event
+@socketio.on("update_username")
+def handle_update_username(data):
+    old_username = users[request.sid]["username"]
+    new_username = data["username"]
+    users[request.sid]["username"] = new_username
+
+    emit("username_updated",{
+        "old_username":old_username,
+        "new_username":new_username
+    },broadcast=True)
+
 
 if __name__ == "__main__":
     socketio.run(app, debug=True)
