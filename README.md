@@ -35,6 +35,10 @@ To run the Flask-SocketIO app locally, follow these steps:
 
    ```bash
    git clone https://github.com/prashantm1535/chat_app.git
+   ```
+
+   ```bash
+   mkdir chat_app
    cd chat_app
    ```
 
