@@ -34,12 +34,15 @@ To run the Flask-SocketIO app locally, follow these steps:
 1. **Clone the repository** (or download the project files):
 
    ```bash
-   git clone https://github.com/prashantm1535/chat_app.git
+   mkdir chat_app
    ```
 
    ```bash
-   mkdir chat_app
    cd chat_app
+   ```
+
+   ```bash
+   git clone https://github.com/prashantm1535/chat_app.git
    ```
 
 2. **Create a virtual environment** (optional but recommended): This step isolates your project dependencies.
