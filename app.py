@@ -71,5 +71,14 @@ def handle_update_username(data):
 
 
 # Running the Flask-SocketIO Application
-if __name__ == "__main__":
-    socketio.run(app, debug=True)
+#if __name__ == "__main__":
+#   socketio.run(app, debug=True, allow_unsafe_werkzeug=True, port=5000)
+if __name__ == '__main__':
+    socketio.run(
+        app,
+        debug=True,
+        allow_unsafe_werkzeug=True,
+        host='0.0.0.0',
+        port=5000
+    )
+
