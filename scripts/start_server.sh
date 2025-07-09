@@ -2,20 +2,19 @@
 
 cd /home/ubuntu/app
 
-# Create virtualenv if it does not exist
-if [ ! -d venv ]; then
-  python3 -m venv venv
+# Create virtualenv if it doesn't exist
+if [ ! -d "venv" ]; then
+    echo "Creating virtual environment..."
+    python3 -m venv venv
 fi
 
-# Activate virtualenv
+# Activate virtual environment
 source venv/bin/activate
 
 # Install dependencies
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 
-# Stop app in pm2 if running (ignore errors)
-pm2 stop flask-realtime || true
-
-# Start app with pm2 using python inside virtualenv
+# Restart application with PM2
+pm2 delete flask-realtime || true
 pm2 start venv/bin/python --name flask-realtime -- app.py
 
