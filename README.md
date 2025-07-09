@@ -93,3 +93,4 @@ By following these steps, the application should be fully operational on your lo
 [avatar url](https://avatar.iran.liara.run/public/boy?username=user_123)
 
 ---
+Trigger test
