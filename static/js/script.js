@@ -89,3 +89,4 @@ function addMessage(message, type, username = "", avatar = "") {
     }
     chatMessages.appendChild(messageElement);
     chatMessages.scrollTop = chatMessages.scrollHeight;
+}
