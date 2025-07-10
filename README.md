@@ -96,3 +96,39 @@ By following these steps, the application should be fully operational on your lo
 Trigger test
 # live deploy trigger
 # trigger
+
+#Prerequisites
+AWS EC2 Ubuntu instance (t2.micro or larger)
+
+AWS IAM Role with CodeDeploy, S3, EC2, and CodePipeline access
+
+GitHub repository (connected to CodePipeline)
+
+Flask app using socketio.run()
+
+Basic AWS CLI and EC2 setup knowledge
+
+🚀 Setup AWS CodePipeline
+Create an S3 bucket for artifacts.
+
+Create CodeDeploy Application + Deployment Group.
+
+Create a CodePipeline:
+
+Source: GitHub (connect your repo)
+
+Build: Skip or use CodeBuild if needed
+
+Deploy: AWS CodeDeploy (select your application + group)
+
+🔁 Now: GitHub → CodePipeline → EC2 Auto Deploy
+Every time you push to GitHub, your changes are:
+
+Pulled by CodePipeline
+
+Deployed to EC2 by CodeDeploy
+
+Restarted automatically by PM2
+
+Available at: http://<your-ec2-ip>:5000
+
